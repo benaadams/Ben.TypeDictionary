@@ -14,10 +14,10 @@ namespace Ben.Collections.TypeDictionary.Benchmarks
         private TypeDictionary<int> _typeDictionary;
         private Dictionary<Type, int> _dictionary;
 
-        private TypeDictArray<int> _typeDictArray;
-        private TypeDictPure<int> _typeDictPure;
+        //private TypeDictArray<int> _typeDictArray;
+        //private TypeDictPure<int> _typeDictPure;
 
-        [Params(1, 2, 3, 4, 6, 8, 16, 24, 32, 40, 64, 128, 256)]
+        [Params(1, 2, 3, 4, 6, 8, 16, 24, 32, 40, 64, 128, 256, 1024)]
         public int Items { get; set; }
 
         [Benchmark(Baseline = true, Description = "Dictionary<Type,TValue>")]
@@ -77,16 +77,16 @@ namespace Ben.Collections.TypeDictionary.Benchmarks
             _typeDictionary = new TypeDictionary<int>();
             _dictionary = new Dictionary<Type, int>();
 
-            _typeDictArray = new TypeDictArray<int>();
-            _typeDictPure = new TypeDictPure<int>();
+            //_typeDictArray = new TypeDictArray<int>();
+            //_typeDictPure = new TypeDictPure<int>();
 
             for (var i = 0; i < Items; i++)
             {
                 _typeDictionary[_types[i]] = i;
                 _dictionary[_types[i]] = i;
 
-                _typeDictArray[_types[i]] = i;
-                _typeDictPure[_types[i]] = i;
+                //_typeDictArray[_types[i]] = i;
+                //_typeDictPure[_types[i]] = i;
             }
         }
 
