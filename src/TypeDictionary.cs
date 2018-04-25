@@ -15,7 +15,7 @@ namespace Ben.Collections
 
         // Types are in different array to Values to give higher cache density when searching
         private TypeKey[] _types;
-        private ValueBox[] _values;
+        private ValueBox<TValue>[] _values;
         private Dictionary<TypeKey, TValue> _dictionary;
 
         public int Count { get; private set; }
@@ -32,7 +32,7 @@ namespace Ben.Collections
             if (capacity < DictCutOver)
             {
                 _types = new TypeKey[capacity];
-                _values = new ValueBox[capacity];
+                _values = new ValueBox<TValue>[capacity];
             }
             else
             {
@@ -166,7 +166,7 @@ namespace Ben.Collections
             else
             {
                 _types = new TypeKey[DictCutOver];
-                _values = new ValueBox[DictCutOver];
+                _values = new ValueBox<TValue>[DictCutOver];
                 _types[0] = key;
                 _values[0] = value;
             }
@@ -267,48 +267,6 @@ namespace Ben.Collections
 
             object IEnumerator.Current => Current;
             void IEnumerator.Reset() => throw new NotSupportedException();
-        }
-
-
-        // For avoiding covariance checks in the Type array, 
-        // and specializing and devirtualizing the Dictionary comparer based on Key
-        internal readonly struct TypeKey : IEquatable<TypeKey>, IEquatable<Type>
-        {
-            public Type Type { get; }
-
-            public TypeKey(Type type)
-            {
-                Type = type;
-            }
-
-            public bool Equals(TypeKey other) => ReferenceEquals(Type, other.Type);
-            public bool Equals(Type type) => ReferenceEquals(Type, type);
-
-            public override bool Equals(object obj)
-            {
-                if (obj is TypeKey key) return Equals(key);
-                else if (obj is Type type) return ReferenceEquals(Type, type);
-                return false;
-            }
-
-            public override int GetHashCode() => Type.GetHashCode();
-
-            public static implicit operator TypeKey(Type value) => new TypeKey(value);
-            public static implicit operator Type(TypeKey value) => value.Type;
-        }
-
-        // For avoiding covariance checks in the value array
-        internal readonly struct ValueBox
-        {
-            public TValue Value { get; }
-
-            public ValueBox(TValue value)
-            {
-                Value = value;
-            }
-
-            public static implicit operator ValueBox(TValue value) => new ValueBox(value);
-            public static implicit operator TValue(ValueBox value) => value.Value;
         }
     }
 }

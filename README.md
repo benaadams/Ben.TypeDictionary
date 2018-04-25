@@ -1,46 +1,46 @@
 # Ben.TypeDictionary
 
 
-Accessing value via `Type` key, with `Items` count in the Dictionary:
+Accessing all values via `Type` key, with `Items` count in the Dictionary:
 ```
-                  Method | Items | Mean per Item | Op/s per Item | Scaled |
------------------------- |------ |--------------:|--------------:|-------:|
- Dictionary<Type,TValue> |     1 |     22.263 ns |  44,917,152.9 |   1.00 |
-  TypeDictionary<TValue> |     1 |      3.749 ns | 266,763,619.9 |   0.17 |
-                         |       |               |               |        |
- Dictionary<Type,TValue> |     2 |     20.909 ns |  47,826,624.3 |   1.00 |
-  TypeDictionary<TValue> |     2 |      3.746 ns | 266,983,850.6 |   0.18 |
-                         |       |               |               |        |
- Dictionary<Type,TValue> |     3 |     20.209 ns |  49,482,575.8 |   1.00 |
-  TypeDictionary<TValue> |     3 |      3.743 ns | 267,148,815.1 |   0.19 |
-                         |       |               |               |        |
- Dictionary<Type,TValue> |     4 |    19.8104 ns |  50,478,605.9 |   1.00 |
-  TypeDictionary<TValue> |     4 |     4.5568 ns | 219,452,112.8 |   0.23 |
-                         |       |               |               |        |
- Dictionary<Type,TValue> |     6 |    20.3109 ns |  49,234,750.9 |   1.00 |
-  TypeDictionary<TValue> |     6 |     5.4173 ns | 184,593,799.1 |   0.27 |
-                         |       |               |               |        |
- Dictionary<Type,TValue> |     8 |    19.8627 ns |  50,345,601.1 |   1.00 |
-  TypeDictionary<TValue> |     8 |     6.0230 ns | 166,030,629.2 |   0.30 |
-                         |       |               |               |        |
- Dictionary<Type,TValue> |    16 |    21.2779 ns |  46,997,088.8 |   1.00 |
-  TypeDictionary<TValue> |    16 |     8.3958 ns | 119,106,709.9 |   0.39 |
-                         |       |               |               |        |
- Dictionary<Type,TValue> |    24 |    21.2639 ns |  47,027,981.8 |   1.00 |
-  TypeDictionary<TValue> |    24 |    11.5368 ns |  86,679,300.0 |   0.54 |
-                         |       |               |               |        |
- Dictionary<Type,TValue> |    32 |    21.3640 ns |  46,807,635.9 |   1.00 |
-  TypeDictionary<TValue> |    32 |    12.2169 ns |  81,853,874.1 |   0.57 |
-                         |       |               |               |        |
- Dictionary<Type,TValue> |    40 |    22.1265 ns |  45,194,673.9 |   1.00 |
-  TypeDictionary<TValue> |    40 |    13.7770 ns |  72,584,911.2 |   0.62 |
-                         |       |               |               |        |
- Dictionary<Type,TValue> |    64 |    21.0193 ns |  47,575,431.3 |   1.00 |
-  TypeDictionary<TValue> |    64 |    14.1461 ns |  70,690,842.4 |   0.67 |
-                         |       |               |               |        |
- Dictionary<Type,TValue> |   128 |    23.1219 ns |  43,249,123.8 |   1.00 |
-  TypeDictionary<TValue> |   128 |    14.9139 ns |  67,051,633.8 |   0.65 |
-                         |       |               |               |        |
- Dictionary<Type,TValue> |   256 |    22.2625 ns |  44,918,570.5 |   1.00 |
-  TypeDictionary<TValue> |   256 |    15.9900 ns |  62,538,893.7 |   0.72 |
+                  Method | Items |         Mean | Mean per Item | Op/s per Item | Scaled |
+------------------------ |------ |-------------:|--------------:|--------------:|-------:|
+ Dictionary<Type,TValue> |     1 |    21.081 ns |     21.081 ns |  47,435,010.6 |   1.00 |
+  TypeDictionary<TValue> |     1 |     3.906 ns |      3.906 ns | 256,004,395.4 |   0.19 |
+                         |       |              |               |               |        |
+ Dictionary<Type,TValue> |     2 |    42.073 ns |     21.036 ns |  47,536,563.4 |   1.00 |
+  TypeDictionary<TValue> |     2 |     7.803 ns |      3.901 ns | 256,317,782.4 |   0.19 |
+                         |       |              |               |               |        |
+ Dictionary<Type,TValue> |     3 |    62.721 ns |     20.907 ns |  47,831,197.5 |   1.00 |
+  TypeDictionary<TValue> |     3 |    12.426 ns |      4.142 ns | 241,437,039.2 |   0.20 |
+                         |       |              |               |               |        |
+ Dictionary<Type,TValue> |     4 |    79.451 ns |    19.8626 ns |  50,345,750.6 |   1.00 |
+  TypeDictionary<TValue> |     4 |    16.232 ns |     4.0581 ns | 246,422,115.0 |   0.20 |
+                         |       |              |               |               |        |
+ Dictionary<Type,TValue> |     6 |   117.593 ns |    19.5989 ns |  51,023,367.7 |   1.00 |
+  TypeDictionary<TValue> |     6 |    27.731 ns |     4.6219 ns | 216,360,500.9 |   0.24 |
+                         |       |              |               |               |        |
+ Dictionary<Type,TValue> |     8 |   161.165 ns |    20.1456 ns |  49,638,596.5 |   1.00 |
+  TypeDictionary<TValue> |     8 |    41.676 ns |     5.2095 ns | 191,956,731.5 |   0.26 |
+                         |       |              |               |               |        |
+ Dictionary<Type,TValue> |    16 |   353.556 ns |    22.0973 ns |  45,254,488.6 |   1.00 |
+  TypeDictionary<TValue> |    16 |   117.982 ns |     7.3739 ns | 135,613,810.7 |   0.33 |
+                         |       |              |               |               |        |
+ Dictionary<Type,TValue> |    24 |   511.589 ns |    21.3162 ns |  46,912,665.3 |   1.00 |
+  TypeDictionary<TValue> |    24 |   263.217 ns |    10.9674 ns |  91,179,622.1 |   0.51 |
+                         |       |              |               |               |        |
+ Dictionary<Type,TValue> |    32 |   707.041 ns |    22.0950 ns |  45,259,043.5 |   1.00 |
+  TypeDictionary<TValue> |    32 |   381.443 ns |    11.9201 ns |  83,892,032.2 |   0.54 |
+                         |       |              |               |               |        |
+ Dictionary<Type,TValue> |    40 |   856.099 ns |    21.4025 ns |  46,723,582.1 |   1.00 |
+  TypeDictionary<TValue> |    40 |   565.885 ns |    14.1471 ns |  70,685,708.6 |   0.66 |
+                         |       |              |               |               |        |
+ Dictionary<Type,TValue> |    64 | 1,332.218 ns |    20.8159 ns |  48,040,179.7 |   1.00 |
+  TypeDictionary<TValue> |    64 |   872.251 ns |    13.6289 ns |  73,373,340.4 |   0.65 |
+                         |       |              |               |               |        |
+ Dictionary<Type,TValue> |   128 | 2,903.867 ns |    22.6865 ns |  44,079,158.3 |   1.00 |
+  TypeDictionary<TValue> |   128 | 1,736.581 ns |    13.5670 ns |  73,708,036.4 |   0.60 |
+                         |       |              |               |               |        |
+ Dictionary<Type,TValue> |   256 | 5,721.472 ns |    22.3495 ns |  44,743,727.1 |   1.00 |
+  TypeDictionary<TValue> |   256 | 3,793.415 ns |    14.8180 ns |  67,485,364.9 |   0.66 |
 ```
