@@ -20,7 +20,7 @@ namespace Ben.Collections.TypeDictionary.Benchmarks
         [Params(1, 2, 3, 4, 6, 8, 16, 24, 32, 40, 64, 128, 256)]
         public int Items { get; set; }
 
-        [Benchmark(Baseline = true, Description = "Dictionary<Type, TValue>")]
+        [Benchmark(Baseline = true, Description = "Dictionary<Type,TValue>")]
         public int Dictionary()
         {
             var result = 0;

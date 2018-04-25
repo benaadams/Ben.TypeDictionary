@@ -20,8 +20,13 @@ namespace Ben.Collections.TypeDictionary.Benchmarks
             Add(MarkdownExporter.GitHub);
 
             Add(MemoryDiagnoser.Default);
-            Add(new OperationsPerSecondPerItemColumn());
-            Add(DefaultColumnProviders.Instance);
+            Add(ItemsColumn.MeanPerItem);
+            Add(ItemsColumn.OperationsPerSecondPerItem);
+            Add(DefaultColumnProviders.Job);
+            Add(DefaultColumnProviders.Params);
+            Add(DefaultColumnProviders.Diagnosers);
+            Add(BaselineScaledColumn.Scaled);
+
 
             Add(JitOptimizationsValidator.FailOnError);
 
