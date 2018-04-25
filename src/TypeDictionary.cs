@@ -16,8 +16,29 @@ namespace Ben.Collections
         // Types are in different array to Values to give higher cache density when searching
         private TypeKey[] _types;
         private ValueBox[] _values;
-
         private Dictionary<TypeKey, TValue> _dictionary;
+
+        public int Count { get; private set; }
+
+        public TypeDictionary() { }
+
+        public TypeDictionary(int capacity)
+        {
+            if (capacity < 0)
+                ThrowHelper.ThrowArgumentOutOfRangeException_Capacity();
+
+            if (capacity == 0) return;
+
+            if (capacity < DictCutOver)
+            {
+                _types = new TypeKey[capacity];
+                _values = new ValueBox[capacity];
+            }
+            else
+            {
+                _dictionary = new Dictionary<TypeKey, TValue>(capacity);
+            }
+        }
 
         public TValue this[Type key]
         {
@@ -52,6 +73,65 @@ namespace Ben.Collections
                     SetValue(key, in value);
                 }
             }
+        }
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public bool TryGetValue(Type key, out TValue value)
+        {
+            var dictionary = _dictionary;
+            if (dictionary != null)
+            {
+                return dictionary.TryGetValue(key, out value);
+            }
+
+            if (_types == null)
+            {
+                value = default;
+                return false;
+            }
+            else
+            {
+                return TryGetArrayValue(key, out value);
+            }
+        }
+
+        private TValue GetValue(Type key)
+        {
+            var types = _types;
+            for (var i = 0; i < types.Length; i++)
+            {
+                if (ReferenceEquals(types[i].Type, key))
+                {
+                    return _values[i];
+                }
+                else if (types[i].Type is null)
+                {
+                    break;
+                }
+            }
+
+            ThrowHelper.ThrowKeyNotFoundException(key);
+            return default;
+        }
+
+        private bool TryGetArrayValue(Type key, out TValue value)
+        {
+            var types = _types;
+            for (var i = 0; i < types.Length; i++)
+            {
+                if (ReferenceEquals(types[i].Type, key))
+                {
+                    value = _values[i];
+                    return true;
+                }
+                else if (types[i].Type is null)
+                {
+                    break;
+                }
+            }
+
+            value = default;
+            return false;
         }
 
         private void SetValue(Type key, in TValue value)
@@ -92,14 +172,28 @@ namespace Ben.Collections
             }
         }
 
-        private TValue GetValue(Type key)
+        public void Add(Type key, TValue value) => throw new NotImplementedException(); //  => _dictionary.Add(key, value);
+
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public bool ContainsKey(Type key)
+        {
+            var dictionary = _dictionary;
+            if (dictionary != null)
+            {
+                return dictionary.ContainsKey(key);
+            }
+
+            return (_types == null) ? false : ArrayContainsKey(key);
+        }
+
+        private bool ArrayContainsKey(Type key)
         {
             var types = _types;
             for (var i = 0; i < types.Length; i++)
             {
                 if (ReferenceEquals(types[i].Type, key))
                 {
-                    return _values[i];
+                    return true;
                 }
                 else if (types[i].Type is null)
                 {
@@ -107,17 +201,8 @@ namespace Ben.Collections
                 }
             }
 
-            ThrowHelper.ThrowKeyNotFoundException(key);
-            return default;
+            return false;
         }
-
-        public int Count { get; private set; }
-
-        public ICollection<Type> Keys => throw new NotImplementedException();
-
-        public ICollection<TValue> Values => _dictionary.Values;
-
-        public void Add(Type key, TValue value) => _dictionary.Add(key, value);
 
         public void Clear()
         {
@@ -127,13 +212,13 @@ namespace Ben.Collections
             _dictionary?.Clear();
         }
 
-        public bool ContainsKey(Type key) => _dictionary.ContainsKey(key);
+        public ICollection<Type> Keys => throw new NotImplementedException();
 
-        public bool Remove(Type key) => _dictionary.Remove(key);
+        public ICollection<TValue> Values => throw new NotImplementedException();
 
-        public bool TryGetValue(Type key, out TValue value) => _dictionary.TryGetValue(key, out value);
+        public bool Remove(Type key) => throw new NotImplementedException();//  => _dictionary.Remove(key);
 
-        Enumerator GetEnumerator() => new Enumerator(_dictionary.GetEnumerator());
+        Enumerator GetEnumerator() => throw new NotImplementedException();// => new Enumerator(_dictionary.GetEnumerator());
 
         IEnumerator<KeyValuePair<Type, TValue>> IEnumerable<KeyValuePair<Type, TValue>>.GetEnumerator() => GetEnumerator();
 
@@ -141,7 +226,7 @@ namespace Ben.Collections
 
         bool ICollection<KeyValuePair<Type, TValue>>.IsReadOnly => false;
 
-        void ICollection<KeyValuePair<Type, TValue>>.Add(KeyValuePair<Type, TValue> item) => _dictionary.Add(item.Key, item.Value);
+        void ICollection<KeyValuePair<Type, TValue>>.Add(KeyValuePair<Type, TValue> item) => Add(item.Key, item.Value);
 
         bool ICollection<KeyValuePair<Type, TValue>>.Contains(KeyValuePair<Type, TValue> item)
         {

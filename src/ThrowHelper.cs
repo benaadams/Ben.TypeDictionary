@@ -13,6 +13,16 @@ namespace Ben.Collections
             throw GetKeyNotFoundException(key);
         }
 
+        internal static void ThrowArgumentOutOfRangeException_Capacity()
+        {
+            throw GetArgumentOutOfRangeException_Capacity();
+        }
+
+        private static ArgumentOutOfRangeException GetArgumentOutOfRangeException_Capacity()
+        {
+            return new ArgumentOutOfRangeException("capacity is less than 0.");
+        }
+
         private static KeyNotFoundException GetKeyNotFoundException(Type key)
         {
             return new KeyNotFoundException($"The given key '{key.ToString()}' was not present in the dictionary.");

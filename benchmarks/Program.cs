@@ -17,7 +17,7 @@ namespace Ben.Collections.TypeDictionary.Benchmarks
         private TypeDictArray<int> _typeDictArray;
         private TypeDictPure<int> _typeDictPure;
 
-        [Params(1, 2, 4, 8, 16, 32, 64, 128, 256)]
+        [Params(1, 2, 3, 4, 6, 8, 16, 24, 32, 40, 64, 128, 256)]
         public int Items { get; set; }
 
         [Benchmark(Baseline = true, Description = "Dictionary<Type, TValue>")]
@@ -32,7 +32,7 @@ namespace Ben.Collections.TypeDictionary.Benchmarks
             return result;
         }
 
-        [Benchmark(Description = "TypeDictionary<TValue> (Lib)")]
+        [Benchmark(Description = "TypeDictionary<TValue>")]
         public int TypeDictionary()
         {
             var result = 0;
