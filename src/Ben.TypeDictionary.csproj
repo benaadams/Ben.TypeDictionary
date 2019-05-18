@@ -1,9 +1,29 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>netstandard1.0</TargetFramework>
-    <LangVersion>7.2</LangVersion>
-    <RootNamespace>Ben.Collections</RootNamespace>
+    <Product>Ben Core</Product>
+    <Title>Ben.TypeDictionary</Title>
+    <Description>High performance Dictionary for storing CLR Types (avg 2x improvement)</Description>
+    <Authors>Ben Adams</Authors>
+    <RepositoryUrl>https://github.com/benaadams/Ben.TypeDictionary</RepositoryUrl>
+    <RepositoryType>git</RepositoryType>
+    <PackageProjectUrl>https://github.com/benaadams/Ben.TypeDictionary</PackageProjectUrl>
+    <PackageLicenseUrl>https://github.com/benaadams/Ben.TypeDictionary/blob/master/LICENSE</PackageLicenseUrl>
+    <IncludeSource>true</IncludeSource>
+    <DebugType>embedded</DebugType>
   </PropertyGroup>
+
+  <PropertyGroup>
+    <TargetFramework>netstandard1.0</TargetFramework>
+    <RootNamespace>Ben.Collections</RootNamespace>
+    <SignAssembly>true</SignAssembly>
+    <AssemblyOriginatorKeyFile>key.snk</AssemblyOriginatorKeyFile>
+  </PropertyGroup>
+
+
+  <ItemGroup>
+    <PackageReference Include="Nerdbank.GitVersioning" Version="2.1.17" PrivateAssets="all" />
+    <PackageReference Include="SourceLink.Create.CommandLine" Version="2.7.6" PrivateAssets="all" />
+  </ItemGroup>
 
 </Project>
