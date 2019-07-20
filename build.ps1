@@ -24,4 +24,4 @@ if(Test-Path .\artifacts) { Remove-Item .\artifacts -Force -Recurse }
 
 <#exec { & dotnet test .\test\Ben.Demystifier.Test -c Release }#>
 
-exec { & dotnet pack .\src\Ben.TypeDictionary -c Release -o .\artifacts }  
+exec { & dotnet pack .\src\Ben.TypeDictionary.csproj -c Release -o .\artifacts }  
